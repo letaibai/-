@@ -19,12 +19,7 @@
     self.view.backgroundColor = [UIColor grayColor];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"word"];
 }
-
-
-
 #pragma mark - Table view data source
-
-
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
@@ -38,10 +33,9 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"word"];
     }
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%zd",indexPath.row];
+    cell.textLabel.text = [NSString stringWithFormat:@"%zd 段子",indexPath.row];
     
     return cell;
 }
-
 
 @end

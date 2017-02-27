@@ -26,20 +26,23 @@
     [super viewDidLoad];
     [self setup];
     [self preferredStatusBarStyle];
+    //禁止控制器偏移内部tableview控制器
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
+    //添加趣图控制器
     self.picture = [[DLPictureViewController alloc] initWithStyle:UITableViewStylePlain];
-    self.picture.view.frame = CGRectMake(0, DLHeight, self.view.frame.size.width, self.view.frame.size.height - DLHeight);
-    [self.view addSubview:self.picture.view];
-    [self addChildViewController:_picture];
-    
-    
+    [self addChildVc:self.picture];
+    //添加段子控制器
     self.word = [[DLWordViewController alloc] initWithStyle:UITableViewStylePlain];
-    self.word.view.frame = CGRectMake(0, DLHeight, self.view.frame.size.width, self.view.frame.size.height - DLHeight);
-    [self.view addSubview:self.word.view];
-    [self addChildViewController:_word];
+    [self addChildVc:self.word];
 }
-
+///添加子控制器
+- (void)addChildVc:(UITableViewController *)childVc
+{
+    childVc.view.frame = CGRectMake(0, DLHeight, self.view.frame.size.width, self.view.frame.size.height);
+    childVc.tableView.contentInset = UIEdgeInsetsMake(0, 0, DLHeight, 0);
+//    [self.view addSubview:childVc.view];
+    [self addChildViewController:childVc];
+}
 - (void)setup
 {
     [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"bg"] forBarMetrics:UIBarMetricsDefault];
@@ -59,7 +62,6 @@
             //点击了段子选项
         case 0:
         {
-            NSLog(@"%s0----",__func__);
             self.picture.view.hidden = YES;
             self.word.view.hidden = NO;
         }
@@ -67,9 +69,11 @@
             //点击了趣图选项
        case 1:
         {
-            NSLog(@"%s1----",__func__);
             self.word.view.hidden = YES;
-            self.picture.view.hidden = NO;
+            if ([self.picture.view isHidden]) {
+                self.picture.view.hidden = NO;
+            }
+            [self.view addSubview:self.picture.view];
            
         }
             break;

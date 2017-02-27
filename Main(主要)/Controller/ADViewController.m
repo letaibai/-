@@ -40,6 +40,7 @@ static int leftTime = 3;
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timeChange) userInfo:nil repeats:YES];
     [self.timer fire];
     [self setUp];
+    [self preferredStatusBarStyle];
 }
 //初始化
 - (void)setUp
@@ -86,7 +87,11 @@ static int leftTime = 3;
     /** 销毁定时器  */
     [self.timer invalidate];
 }
-
+//修改状态栏颜色
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
 
 
 @end
