@@ -1,0 +1,19 @@
+//
+//  PrefixHeader.pch
+//  段子内涵图
+//
+//  Created by 李卫 on 2017/2/27.
+//  Copyright © 2017年 李卫. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+
+
+#import "UIView+DLFrame.h"
+#define DLMargin 10
+#define DLScreenWidth [UIScreen mainScreen].bounds.size.width
+
+#define DLScreenHeight [UIScreen mainScreen].bounds.size.height
+#endif /* PrefixHeader_pch */

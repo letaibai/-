@@ -44,26 +44,13 @@ static NSString *ID = @"picture";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self loadNewData];
-    self.view.backgroundColor = [UIColor greenColor];
-//    [self.tableView registerClass:[DLPictureViewCell class] forCellReuseIdentifier:ID];
-//    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([DLPictureViewCell class]) bundle:nil forCellReuseIdentifier:ID]];
-    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([DLPictureViewCell class]) bundle:nil] forCellReuseIdentifier:ID];
     //发送网络请求
-    
+    [self loadNewData];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.view.backgroundColor = [UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1.0];
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([DLPictureViewCell class]) bundle:nil] forCellReuseIdentifier:ID];
 }
-//- (NSArray *)pictureItems
-//{
-//    if (_pictureItems == nil) {
-//        _pictureItems = [NSArray array];
-//    }
-//    return _pictureItems;
-//}
-//- (void)viewDidAppear:(BOOL)animated
-//{
-//    [super viewDidAppear:animated];
-//    
-//}
+
 #pragma mark - 请求网络数据
 /*
  * 加载新数据
@@ -71,7 +58,7 @@ static NSString *ID = @"picture";
 - (void)loadNewData
 {
     //发送网络请求
-    NSString *url = @"http://api.jisuapi.com/xiaohua/all";
+    NSString *url = @"http://api.jisuapi.com/xiaohua/pic";
     NSDictionary *params = @{@"pagenum"  : @1,
                              @"pagesize" : @20,
                              @"sort"     : @"addtime",
@@ -82,11 +69,9 @@ static NSString *ID = @"picture";
     [manager GET:url parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *responseObject) {
-         NSLog(@"请求成功");
-        [responseObject writeToFile:@"/Users/davelee/Desktop/all.plist" atomically:YES];
         self.pictureItems = [DLPictureItem mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"list"]];
-        NSLog(@"%@",_pictureItems);
-//        self.pictureItems = pic;
+//        [responseObject writeToFile:@"/Users/davelee/Desktop/pic.plist" atomically:YES];
+        [self.tableView reloadData];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);
     }];
@@ -96,9 +81,6 @@ static NSString *ID = @"picture";
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
-    
-    NSLog(@"%lu --------",(unsigned long)self.pictureItems.count);
     return self.pictureItems.count;
 }
 
@@ -108,13 +90,19 @@ static NSString *ID = @"picture";
     if (cell == nil) {
         cell = [[DLPictureViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
     }
-    NSLog(@"%@------",self.pictureItems[indexPath.row]);
     cell.picture = self.pictureItems[indexPath.row];
     
     return cell;
 }
-
+//返回tableView的估算高度
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    DLPictureItem *item = self.pictureItems[indexPath.row];
+    NSLog(@"%zd----",item.cellHeight);
+    return item.cellHeight;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 200;
 }

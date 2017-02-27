@@ -39,7 +39,7 @@
 - (void)addChildVc:(UITableViewController *)childVc
 {
     childVc.view.frame = CGRectMake(0, DLHeight, self.view.frame.size.width, self.view.frame.size.height);
-    childVc.tableView.contentInset = UIEdgeInsetsMake(0, 0, DLHeight, 0);
+    childVc.tableView.contentInset = UIEdgeInsetsMake(0, 0, DLHeight + DLMargin,0);
 //    [self.view addSubview:childVc.view];
     [self addChildViewController:childVc];
 }
