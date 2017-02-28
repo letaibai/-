@@ -28,6 +28,8 @@
     [super awakeFromNib];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 //    self.translatesAutoresizingMaskIntoConstraints = NO;
+    self.autoresizingMask = NO;
+    self.content.preferredMaxLayoutWidth = DLScreenWidth - 4 * DLMargin;
     self.backgroundColor = [UIColor clearColor];
     self.textLabel.backgroundColor = [UIColor clearColor];
     self.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cell_background"]];
@@ -36,13 +38,13 @@
 - (void)setPicture:(DLPictureItem *)picture
 {
     _picture = picture;
+    [self.pic sd_setImageWithURL:[NSURL URLWithString:picture.pic] placeholderImage:[UIImage imageNamed:@"img_default"]];
     //时间
     self.addTime.text = picture.addtime;
     //#warning 对时间显示做一下处理
     //内容
     self.content.text = picture.content;
-    
-    [self.pic sd_setImageWithURL:[NSURL URLWithString:picture.pic] placeholderImage:[UIImage imageNamed:@"img_default"]];
+    [self layoutIfNeeded];
 }
 - (void)setFrame:(CGRect)frame
 {
@@ -52,12 +54,4 @@
     frame.size.height -= DLMargin;
     [super setFrame:frame];
 }
-//- (void)layoutSubviews
-//{
-//    self.dl_x = DLMargin;
-//    self.dl_y += DLMargin;
-//    self.dl_width -= 2 * DLMargin;
-//    self.dl_height -= DLMargin;
-//    [super layoutSubviews];
-//}
 @end

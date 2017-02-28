@@ -29,8 +29,8 @@
 @property (nonatomic,strong) NSString *content;
 /** 时间  */
 @property (nonatomic,strong) NSString *addtime;
-/** 详情页地址  */
-@property (nonatomic,strong) NSString *url;
+///** cell的高度  */
+@property (nonatomic,assign) CGFloat cellHeight;
 
 
 @end

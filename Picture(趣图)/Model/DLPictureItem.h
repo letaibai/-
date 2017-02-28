@@ -32,12 +32,8 @@
 @property (nonatomic,strong) NSString *pic;
 /** 时间  */
 @property (nonatomic,strong) NSString *addtime;
-
-/** 详情页地址  */
-@property (nonatomic,strong) NSString *url;
 ///** cell的高度  */
 @property (nonatomic,assign) CGFloat cellHeight;
 
-+ (instancetype)itemWithDict:(NSDictionary *)dict;
 
 @end

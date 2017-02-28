@@ -12,33 +12,17 @@
 #import <MJRefresh/MJRefresh.h>
 #import "DLPictureItem.h"
 #import "DLPictureViewCell.h"
+#import <UIImageView+WebCache.h>
 
 
 
 @interface DLPictureViewController ()
 
-@property(nonatomic,strong) NSArray *pictureItems;
+@property(nonatomic,strong) NSMutableArray *pictureItems;
 
 @end
 
 @implementation DLPictureViewController
-
-//- (NSArray *)pictureItems
-//{
-//    if (!_pictureItems) {
-//        NSString *str = [[NSBundle mainBundle] pathForResource:@"pic" ofType:@"plist"];
-//        NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:str];
-//        NSArray *arr = dict[@"result"][@"list"];
-//        NSMutableArray *picArr = [NSMutableArray array];
-//        for (NSDictionary *dict in arr) {
-//            DLPictureItem *item = [DLPictureItem itemWithDict:dict];
-//            [picArr addObject:item];
-//            _pictureItems = picArr;
-//        }
-//    }
-//    return _pictureItems;
-//}
-
 /*
  接口地址：
  http://api.jisuapi.com/xiaohua/all
@@ -57,6 +41,7 @@
  sort=rand时，pagenum无效
  */
 static NSString *ID = @"picture";
+static int page = 2;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -99,7 +84,6 @@ static NSString *ID = @"picture";
     } success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *responseObject) {
         //字典转模型
         self.pictureItems = [DLPictureItem mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"list"]];
-//        [responseObject writeToFile:@"/Users/davelee/Desktop/pic.plist" atomically:YES];
         //结束刷新
         [self.tableView.mj_header endRefreshing];
         //刷新表格
@@ -117,7 +101,7 @@ static NSString *ID = @"picture";
     [self.tableView.mj_header endRefreshing];
     //发送网络请求
     NSString *url = @"http://api.jisuapi.com/xiaohua/pic";
-    NSDictionary *params = @{@"pagenum"  : @2,
+    NSDictionary *params = @{@"pagenum"  : @(page),
                              @"pagesize" : @20,
                              @"sort"     : @"addtime",
                              @"appkey"   : @"bf0ea749ff603575"
@@ -128,17 +112,17 @@ static NSString *ID = @"picture";
         
     } success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *responseObject) {
         //字典转模型
-        self.pictureItems = [DLPictureItem mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"list"]];
+         NSArray *arr = [DLPictureItem mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"list"]];
+         [self.pictureItems addObjectsFromArray:arr];
         //        [responseObject writeToFile:@"/Users/davelee/Desktop/pic.plist" atomically:YES];
         //刷新表格
         [self.tableView reloadData];
         //结束刷新
         [self.tableView.mj_footer endRefreshing];
+        page ++;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);
     }];
-    
-    
 }
 
 #pragma mark - Table view data source
@@ -162,5 +146,10 @@ static NSString *ID = @"picture";
 {
     DLPictureItem *item = self.pictureItems[indexPath.row];
     return item.cellHeight;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 200;
 }
 @end

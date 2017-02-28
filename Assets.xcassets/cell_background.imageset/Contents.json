@@ -23,15 +23,15 @@
       "resizing" : {
         "mode" : "9-part",
         "center" : {
-          "mode" : "stretch",
+          "mode" : "tile",
           "width" : 1,
           "height" : 1
         },
         "cap-insets" : {
-          "bottom" : 40,
-          "top" : 50,
-          "right" : 50,
-          "left" : 50
+          "bottom" : 100,
+          "top" : 99,
+          "right" : 320,
+          "left" : 319
         }
       },
       "idiom" : "universal",
