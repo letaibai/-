@@ -24,13 +24,13 @@
 //        NSString *string = [str stringByTrimmingCharactersInSet:set];
 ////        NSLog(@"%@",string);
         
-//        CGFloat textY = 50;
+        CGFloat textY = 50;
         CGFloat textW = [UIScreen mainScreen].bounds.size.width - 4 * DLMargin;
-        CGRect textH = [self.content boundingRectWithSize:CGSizeMake(textW, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:15]} context:nil];
+        CGFloat textH = [self.content boundingRectWithSize:CGSizeMake(textW, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:15]} context:nil].size.height;
 //        CGFloat height = textH;
         
 //        NSLog(@"%zd",height);
-//        self.cellHeight = textY + textH + 2 * DLMargin;
+        _cellHeight = textY + textH + 4 * DLMargin;
       
      }
     return _cellHeight;
