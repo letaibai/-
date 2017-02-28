@@ -29,6 +29,7 @@
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 //    self.translatesAutoresizingMaskIntoConstraints = NO;
     self.backgroundColor = [UIColor clearColor];
+    self.textLabel.backgroundColor = [UIColor clearColor];
     self.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cell_background"]];
 }
 //设置模型数据

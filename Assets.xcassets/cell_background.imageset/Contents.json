@@ -1,6 +1,20 @@
 {
   "images" : [
     {
+      "resizing" : {
+        "mode" : "9-part",
+        "center" : {
+          "mode" : "tile",
+          "width" : 1,
+          "height" : 1
+        },
+        "cap-insets" : {
+          "bottom" : 2,
+          "top" : 2,
+          "right" : 160,
+          "left" : 159
+        }
+      },
       "idiom" : "universal",
       "filename" : "cell_background.png",
       "scale" : "1x"
@@ -14,10 +28,10 @@
           "height" : 1
         },
         "cap-insets" : {
-          "bottom" : 100,
-          "top" : 99,
-          "right" : 320,
-          "left" : 318
+          "bottom" : 40,
+          "top" : 50,
+          "right" : 50,
+          "left" : 50
         }
       },
       "idiom" : "universal",
