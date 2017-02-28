@@ -41,16 +41,16 @@
     //内容
     self.content.text = picture.content;
     
-//    [self.pic sd_setImageWithURL:[NSURL URLWithString:picture.pic] placeholderImage:[UIImage imageNamed:@"img_default"]];
+    [self.pic sd_setImageWithURL:[NSURL URLWithString:picture.pic] placeholderImage:[UIImage imageNamed:@"img_default"]];
 }
-//- (void)setFrame:(CGRect)frame
-//{
-//    frame.origin.x = DLMargin;
-//    frame.origin.y += DLMargin;
-//    frame.size.width -= 2 * DLMargin;
-//    frame.size.height -= DLMargin;
-//    [super setFrame:frame];
-//}
+- (void)setFrame:(CGRect)frame
+{
+    frame.origin.x = DLMargin;
+    frame.origin.y += DLMargin;
+    frame.size.width -= 2 * DLMargin;
+    frame.size.height -= DLMargin;
+    [super setFrame:frame];
+}
 //- (void)layoutSubviews
 //{
 //    self.dl_x = DLMargin;

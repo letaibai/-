@@ -23,6 +23,22 @@
 
 @implementation DLPictureViewController
 
+- (NSArray *)pictureItems
+{
+    if (!_pictureItems) {
+        NSString *str = [[NSBundle mainBundle] pathForResource:@"pic" ofType:@"plist"];
+        NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:str];
+        NSArray *arr = dict[@"result"][@"list"];
+        NSMutableArray *picArr = [NSMutableArray array];
+        for (NSDictionary *dict in arr) {
+            DLPictureItem *item = [DLPictureItem itemWithDict:dict];
+            [picArr addObject:item];
+            _pictureItems = picArr;
+        }
+    }
+    return _pictureItems;
+}
+
 /*
  接口地址：
  http://api.jisuapi.com/xiaohua/all
@@ -45,7 +61,7 @@ static NSString *ID = @"picture";
 - (void)viewDidLoad {
     [super viewDidLoad];
     //发送网络请求
-    [self loadNewData];
+//    [self loadNewData];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.view.backgroundColor = [UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1.0];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([DLPictureViewCell class]) bundle:nil] forCellReuseIdentifier:ID];
@@ -55,28 +71,28 @@ static NSString *ID = @"picture";
 /*
  * 加载新数据
  */
-- (void)loadNewData
-{
-    //发送网络请求
-    NSString *url = @"http://api.jisuapi.com/xiaohua/pic";
-    NSDictionary *params = @{@"pagenum"  : @1,
-                             @"pagesize" : @20,
-                             @"sort"     : @"addtime",
-                             @"appkey"   : @"bf0ea749ff603575"
-                            };
-    
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] init];
-    [manager GET:url parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *responseObject) {
-        self.pictureItems = [DLPictureItem mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"list"]];
-//        [responseObject writeToFile:@"/Users/davelee/Desktop/pic.plist" atomically:YES];
-        [self.tableView reloadData];
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@",error);
-    }];
-   
-}
+//- (void)loadNewData
+//{
+//    //发送网络请求
+//    NSString *url = @"http://api.jisuapi.com/xiaohua/pic";
+//    NSDictionary *params = @{@"pagenum"  : @1,
+//                             @"pagesize" : @20,
+//                             @"sort"     : @"addtime",
+//                             @"appkey"   : @"bf0ea749ff603575"
+//                            };
+//    
+//    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] init];
+//    [manager GET:url parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {
+//        
+//    } success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *responseObject) {
+//        self.pictureItems = [DLPictureItem mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"list"]];
+////        [responseObject writeToFile:@"/Users/davelee/Desktop/pic.plist" atomically:YES];
+//        [self.tableView reloadData];
+//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//        NSLog(@"%@",error);
+//    }];
+//   
+//}
 
 #pragma mark - Table view data source
 
@@ -102,8 +118,8 @@ static NSString *ID = @"picture";
     return item.cellHeight;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 200;
-}
+//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return 200;
+//}
 @end
