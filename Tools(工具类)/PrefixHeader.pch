@@ -15,7 +15,7 @@ typedef enum {
     DLTypePicture = 2
 } DLType;
 
-
+#define DLLogFunc NSLog(@"%s",__func__);
 #import "UIView+DLFrame.h"
 #define DLHeight 64
 #define DLMargin 10

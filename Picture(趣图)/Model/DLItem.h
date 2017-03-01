@@ -10,9 +10,8 @@
 
 
 @interface DLItem : NSObject
-
 /*
- 图片返回内容
+ 返回内容
  total	string	总数
  pagenum	int	当前页
  pagesize	int	每页条数
@@ -33,9 +32,9 @@
 @property (nonatomic,strong) NSString *pic;
 /** 时间  */
 @property (nonatomic,strong) NSString *addtime;
-///** cell的高度  */
+/** cell的高度  */
 @property (nonatomic,assign) CGFloat cellHeight;
-///** cell的高度  */
+/** 控制器的类型 */
 @property (nonatomic,assign) DLType type;
 
 
