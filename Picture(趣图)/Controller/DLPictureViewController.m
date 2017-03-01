@@ -10,13 +10,11 @@
 
 @interface DLPictureViewController ()
 
-@property(nonatomic,strong) NSMutableArray *pictureItems;
-
 @end
 
 @implementation DLPictureViewController
 //返回子控制器的类型
-- (DLType)type
+- (DLType)dl_type
 {
     return DLTypePicture;
 }

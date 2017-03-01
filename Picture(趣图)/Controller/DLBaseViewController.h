@@ -11,6 +11,7 @@
 @interface DLBaseViewController : UITableViewController
 
 //@property (nonatomic,assign) DLType type;
-- (DLType)type;
+
+- (DLType)dl_type;
 
 @end

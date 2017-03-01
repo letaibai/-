@@ -28,16 +28,18 @@ static NSString *ID = @"cell";
 
 static int page = 2;
 
+#pragma mark - viewDidLoad
 - (void)viewDidLoad {
     [super viewDidLoad];
     //    发送网络请求
     [self setupRefresh];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.view.backgroundColor = [UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1.0];
+    self.view.backgroundColor = [UIColor colorWithRed:222/255.0 green:222/255.0 blue:222/255.0 alpha:1.0];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([DLItemCell class]) bundle:nil] forCellReuseIdentifier:ID];
 }
-- (DLType)type
+//消除控制器警告
+- (DLType)dl_type
 {
     return 2;
 }
@@ -55,9 +57,9 @@ static int page = 2;
 - (NSString *)httpHead
 {
     NSString *url;
-    if (self.type == DLTypeWord) {
+    if (self.dl_type == DLTypeWord) {
         url = @"http://api.jisuapi.com/xiaohua/text";
-    }else if(self.type == DLTypePicture){
+    }else if(self.dl_type == DLTypePicture){
         url = @"http://api.jisuapi.com/xiaohua/pic";
     }
     return url;
@@ -82,6 +84,8 @@ static int page = 2;
     } success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *responseObject) {
         //字典转模型
         self.items = [DLItem mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"list"]];
+        [self typeForVc];
+        
         //结束刷新
         [self.tableView.mj_header endRefreshing];
         //刷新表格
@@ -98,7 +102,7 @@ static int page = 2;
 {
     [self.tableView.mj_header endRefreshing];
     //发送网络请求
-    NSString *url = @"http://api.jisuapi.com/xiaohua/pic";
+    NSString *url = [self httpHead];
     NSDictionary *params = @{@"pagenum"  : @(page),
                              @"pagesize" : @20,
                              @"sort"     : @"addtime",
@@ -112,6 +116,8 @@ static int page = 2;
         //字典转模型
         NSArray *arr = [DLItem mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"list"]];
         [self.items addObjectsFromArray:arr];
+        [self typeForVc];
+        
         //        [responseObject writeToFile:@"/Users/davelee/Desktop/pic.plist" atomically:YES];
         //刷新表格
         [self.tableView reloadData];
@@ -122,7 +128,14 @@ static int page = 2;
         NSLog(@"%@",error);
     }];
 }
-
+//设置控制器的type
+- (void)typeForVc
+{
+    for (int i = 0; i < self.items.count; i++) {
+        DLItem *item = self.items[i];
+        item.type = self.dl_type;
+    }
+}
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -135,7 +148,7 @@ static int page = 2;
     if (cell == nil) {
         cell = [[DLItemCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
     }
-    cell.picture = self.items[indexPath.row];
+    cell.item = self.items[indexPath.row];
     
     return cell;
 }

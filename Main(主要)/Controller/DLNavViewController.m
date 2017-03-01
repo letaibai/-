@@ -13,7 +13,7 @@
 
 @interface DLNavViewController ()
 
-#define DLHeight 64
+
 
 @property (nonatomic,strong) DLPictureViewController *picture;
 @property (nonatomic,strong) DLWordViewController  *word;
@@ -64,6 +64,8 @@
         {
             self.picture.view.hidden = YES;
             self.word.view.hidden = NO;
+//            self.picture.view.hidden = NO;
+//            self.word.view.hidden = YES;
         }
             break;
             //点击了趣图选项
@@ -72,6 +74,7 @@
             self.word.view.hidden = YES;
             if ([self.picture.view isHidden]) {
                 self.picture.view.hidden = NO;
+//                self.picture.type = DLTypePicture;
             }
             [self.view addSubview:self.picture.view];
            

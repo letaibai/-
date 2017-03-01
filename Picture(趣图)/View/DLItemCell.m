@@ -17,9 +17,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *content;
 /** 图片  */
 @property (weak, nonatomic) IBOutlet UIImageView *pic;
-
-
-
 @end
 
 @implementation DLItemCell
@@ -27,30 +24,34 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-//    self.translatesAutoresizingMaskIntoConstraints = NO;
     self.autoresizingMask = NO;
+    //设置文字的最大宽度,更精确计算label的高度
     self.content.preferredMaxLayoutWidth = DLScreenWidth - 4 * DLMargin;
     self.backgroundColor = [UIColor clearColor];
-    self.textLabel.backgroundColor = [UIColor clearColor];
-    self.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cell_background"]];
+//    self.textLabel.backgroundColor = [UIColor clearColor];
+    self.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"mainCellBackground"]];
 }
+#pragma mark - 设置模型数据
 //设置模型数据
-- (void)setPicture:(DLItem *)picture
+- (void)setItem:(DLItem *)item
 {
-    _picture = picture;
-    if (picture.type == DLTypePicture) {
-        self.pic.hidden = NO;
-        [self.pic sd_setImageWithURL:[NSURL URLWithString:picture.pic] placeholderImage:[UIImage imageNamed:@"img_default"]];
-    }else if(picture.type == DLTypeWord){
+    _item = item;
+    
+    if (item.type == DLTypeWord) {
         self.pic.hidden = YES;
+    }else if(item.type == DLTypePicture){
+        self.pic.hidden = NO;
+        [self.pic sd_setImageWithURL:[NSURL URLWithString:item.pic] placeholderImage:[UIImage imageNamed:@"img_default"]];
     }
     //时间
-    self.addTime.text = picture.addtime;
+    self.addTime.text = item.addtime;
     //#warning 对时间显示做一下处理
     //内容
-    self.content.text = picture.content;
+    self.content.text = item.content;
     [self layoutIfNeeded];
 }
+#pragma mark - 设置cell的整体间距
+//设置cell的整体间距
 - (void)setFrame:(CGRect)frame
 {
     frame.origin.x = DLMargin;

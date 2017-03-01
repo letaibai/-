@@ -12,7 +12,7 @@
 
 @interface DLItemCell : UITableViewCell
 
-@property(nonatomic,strong) DLItem *picture;
+@property(nonatomic,strong) DLItem *item;
 
 
 @end

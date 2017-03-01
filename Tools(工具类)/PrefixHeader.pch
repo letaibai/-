@@ -11,12 +11,13 @@
 
 //定义自控制器的类型,用来做继承
 typedef enum {
-    DLTypeWord ,
-    DLTypePicture
+    DLTypeWord = 1,
+    DLTypePicture = 2
 } DLType;
 
 
 #import "UIView+DLFrame.h"
+#define DLHeight 64
 #define DLMargin 10
 #define DLScreenWidth [UIScreen mainScreen].bounds.size.width
 

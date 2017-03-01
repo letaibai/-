@@ -16,7 +16,7 @@
 
 @implementation DLWordViewController
 //返回子控制器的类型
-- (DLType)type
+- (DLType)dl_type
 {
     return DLTypeWord;
 }

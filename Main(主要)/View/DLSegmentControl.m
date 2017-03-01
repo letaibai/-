@@ -17,14 +17,6 @@
     }
     return self;
 }
-//- (instancetype)initWithCoder:(NSCoder *)aDecoder
-//{
-//    if (self = [super initWithCoder:aDecoder]) {
-//        [self setup];
-//    }
-//    return self;
-//}
-//
 - (void)setup
 {
     //普通状态下文字颜色:白色
