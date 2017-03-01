@@ -26,6 +26,7 @@
     [super viewDidLoad];
     [self setup];
     [self preferredStatusBarStyle];
+    
     //禁止控制器偏移内部tableview控制器
     self.automaticallyAdjustsScrollViewInsets = NO;
     //添加趣图控制器
@@ -89,4 +90,5 @@
 {
     return UIStatusBarStyleLightContent;
 }
+
 @end

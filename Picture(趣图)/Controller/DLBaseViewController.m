@@ -31,6 +31,12 @@ static int page = 2;
 #pragma mark - viewDidLoad
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn setImage:[UIImage imageNamed:@"setting"] forState:UIControlStateNormal];
+    [btn setImage:[UIImage imageNamed:@"setting_press"] forState:UIControlStateHighlighted];
+    [btn sizeToFit];
+//    btn.contentEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
     //    发送网络请求
     [self setupRefresh];
     
@@ -38,6 +44,12 @@ static int page = 2;
     self.view.backgroundColor = [UIColor colorWithRed:222/255.0 green:222/255.0 blue:222/255.0 alpha:1.0];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([DLItemCell class]) bundle:nil] forCellReuseIdentifier:ID];
 }
+#pragma mark - 点击了导航栏左侧的设置按钮
+- (void)settingClick:(UIBarButtonItem *)item
+{
+    
+}
+
 //消除控制器警告
 - (DLType)dl_type
 {
