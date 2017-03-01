@@ -9,6 +9,11 @@
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
 
+//定义自控制器的类型,用来做继承
+typedef enum {
+    DLTypeWord ,
+    DLTypePicture
+} DLType;
 
 
 #import "UIView+DLFrame.h"

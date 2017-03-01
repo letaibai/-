@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DLBaseViewController.h"
 
-@interface DLWordViewController : UITableViewController
+@interface DLWordViewController : DLBaseViewController
 
 @end

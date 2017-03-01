@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DLPictureItem : NSObject
+
+@interface DLItem : NSObject
 
 /*
  图片返回内容
@@ -34,6 +35,8 @@
 @property (nonatomic,strong) NSString *addtime;
 ///** cell的高度  */
 @property (nonatomic,assign) CGFloat cellHeight;
+///** cell的高度  */
+@property (nonatomic,assign) DLType type;
 
 
 @end

@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class DLPictureItem;
+@class DLItem;
 
-@interface DLPictureViewCell : UITableViewCell
+@interface DLItemCell : UITableViewCell
 
-@property(nonatomic,strong) DLPictureItem *picture;
+@property(nonatomic,strong) DLItem *picture;
+
 
 @end
