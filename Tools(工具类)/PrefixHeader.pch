@@ -19,6 +19,7 @@ typedef enum {
 #import "UIView+DLFrame.h"
 #define DLHeight 64
 #define DLMargin 10
+#define Height 60
 #define DLScreenWidth [UIScreen mainScreen].bounds.size.width
 
 #define DLScreenHeight [UIScreen mainScreen].bounds.size.height

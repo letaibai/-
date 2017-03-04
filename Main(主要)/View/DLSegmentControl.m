@@ -27,7 +27,6 @@
     NSMutableDictionary *selDict =[NSMutableDictionary dictionary];
     selDict[NSForegroundColorAttributeName] = [UIColor colorWithRed:229/255.0 green:28/255.0 blue:35/255.0 alpha:1.0];
     selDict[NSFontAttributeName] = [UIFont systemFontOfSize:16];
-    
     //修改文字颜色
     //普通
     [self setTitleTextAttributes:dict forState:UIControlStateNormal];
@@ -35,7 +34,6 @@
     [self setTitleTextAttributes:selDict forState:UIControlStateHighlighted];
 
 }
-
 - (void)layoutSubviews
 {
     [super layoutSubviews];

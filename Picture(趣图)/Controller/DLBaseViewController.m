@@ -14,8 +14,6 @@
 #import "DLItemCell.h"
 #import <UIImageView+WebCache.h>
 
-
-
 @interface DLBaseViewController ()
 
 @property(nonatomic,strong) NSMutableArray *items;
@@ -31,18 +29,27 @@ static int page = 2;
 #pragma mark - viewDidLoad
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setup];
+//    发送网络请求
+    [self setupRefresh];
+}
+//初始化
+- (void)setup
+{
+    self.view.frame = CGRectMake(0, DLHeight, self.view.dl_width, self.view.dl_height - DLHeight);
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, Height,0);
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn setImage:[UIImage imageNamed:@"setting"] forState:UIControlStateNormal];
     [btn setImage:[UIImage imageNamed:@"setting_press"] forState:UIControlStateHighlighted];
     [btn sizeToFit];
-//    btn.contentEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
-    //    发送网络请求
-    [self setupRefresh];
-    
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.view.backgroundColor = [UIColor colorWithRed:222/255.0 green:222/255.0 blue:222/255.0 alpha:1.0];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([DLItemCell class]) bundle:nil] forCellReuseIdentifier:ID];
+    //添加广告view
+    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, DLScreenHeight - Height, self.view.dl_width,Height )];
+    v.backgroundColor = [UIColor redColor];
+    [[[UIApplication sharedApplication].windows lastObject] addSubview:v];
 }
 #pragma mark - 点击了导航栏左侧的设置按钮
 - (void)settingClick:(UIBarButtonItem *)item
@@ -129,8 +136,6 @@ static int page = 2;
         NSArray *arr = [DLItem mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"list"]];
         [self.items addObjectsFromArray:arr];
         [self typeForVc];
-        
-        //        [responseObject writeToFile:@"/Users/davelee/Desktop/pic.plist" atomically:YES];
         //刷新表格
         [self.tableView reloadData];
         //结束刷新
@@ -148,12 +153,11 @@ static int page = 2;
         item.type = self.dl_type;
     }
 }
-#pragma mark - Table view data source
+#pragma mark - TableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.items.count;
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     DLItemCell *cell = [tableView dequeueReusableCellWithIdentifier:ID forIndexPath:indexPath];
@@ -164,15 +168,22 @@ static int page = 2;
     
     return cell;
 }
-//返回tableView的估算高度
+//返回tableView的高度
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DLItem *item = self.items[indexPath.row];
     return item.cellHeight;
 }
-
+//返回tableView的估算高度
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 200;
 }
+
+#pragma mark - TableViewDelegate
+//选中tableView的某一行
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    
+//}
 @end

@@ -12,10 +12,9 @@
 #import "DLPictureViewController.h"
 
 @interface DLNavViewController ()
-
-
-
+/** 图片控制器  */
 @property (nonatomic,strong) DLPictureViewController *picture;
+/** 段子控制器  */
 @property (nonatomic,strong) DLWordViewController  *word;
 
 @end
@@ -31,18 +30,10 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     //添加趣图控制器
     self.picture = [[DLPictureViewController alloc] initWithStyle:UITableViewStylePlain];
-    [self addChildVc:self.picture];
+    [self addChildViewController:self.picture];
     //添加段子控制器
     self.word = [[DLWordViewController alloc] initWithStyle:UITableViewStylePlain];
-    [self addChildVc:self.word];
-}
-///添加子控制器
-- (void)addChildVc:(UITableViewController *)childVc
-{
-    childVc.view.frame = CGRectMake(0, DLHeight, self.view.frame.size.width, self.view.frame.size.height);
-    childVc.tableView.contentInset = UIEdgeInsetsMake(0, 0, DLHeight + DLMargin,0);
-//    [self.view addSubview:childVc.view];
-    [self addChildViewController:childVc];
+    [self addChildViewController:self.word];
 }
 - (void)setup
 {
@@ -55,6 +46,7 @@
     seg.apportionsSegmentWidthsByContent = YES;
     [seg addTarget:self action:@selector(change:) forControlEvents:UIControlEventValueChanged];
     [self.navigationBar addSubview:seg];
+
 }
 //点击了segmentControl的选项卡
 - (void)change:(DLSegmentControl *)segmentControl
@@ -65,8 +57,6 @@
         {
             self.picture.view.hidden = YES;
             self.word.view.hidden = NO;
-//            self.picture.view.hidden = NO;
-//            self.word.view.hidden = YES;
         }
             break;
             //点击了趣图选项
@@ -75,15 +65,12 @@
             self.word.view.hidden = YES;
             if ([self.picture.view isHidden]) {
                 self.picture.view.hidden = NO;
-//                self.picture.type = DLTypePicture;
             }
             [self.view addSubview:self.picture.view];
-           
         }
             break;
     }
 }
-
 //preferredStatusBarStyle
 //返回状态栏的颜色
 - (UIStatusBarStyle)preferredStatusBarStyle

@@ -10,6 +10,7 @@
 #import "DLItem.h"
 #import <UIImageView+WebCache.h>
 #import <SVProgressHUD.h>
+#import "DLShowPictureViewController.h"
 
 @interface DLItemCell ()
 /** 发布时间  */
@@ -40,7 +41,19 @@ static int count = 0 ;
     self.backgroundColor = [UIColor clearColor];
     [self btnAddImageVc];
     self.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"mainCellBackground"]];
+    self.pic.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPicture)];
+    [self.pic addGestureRecognizer:tap];
 }
+#pragma mark - 图片手势监听
+- (void)showPicture
+{
+    DLShowPictureViewController *showPic = [[DLShowPictureViewController alloc] init];
+    showPic.item = self.item;
+    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:showPic animated:YES completion:nil];
+    
+}
+
 #pragma mark - 设置模型数据
 //设置模型数据
 - (void)setItem:(DLItem *)item
@@ -112,7 +125,7 @@ static int count = 0 ;
         self.ima.hidden = YES;
         [SVProgressHUD dismiss];
     });
-    
+    //点赞+1的动画
     CAKeyframeAnimation * animation;
     animation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
     animation.duration = 0.5;

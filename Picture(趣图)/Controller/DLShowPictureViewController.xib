@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DLShowPictureViewController">
+            <connections>
+                <outlet property="scrollView" destination="hrB-2w-1YL" id="f2i-ev-wTX"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hrB-2w-1YL">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                </scrollView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R2D-8K-qLU">
+                    <rect key="frame" x="280" y="572" width="45" height="45"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="45" id="0Hd-cr-MpK"/>
+                        <constraint firstAttribute="height" constant="45" id="0W1-JK-txU"/>
+                    </constraints>
+                    <state key="normal" image="icon_down"/>
+                    <connections>
+                        <action selector="save:" destination="-1" eventType="touchUpInside" id="BLO-ZW-OTg"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="hrB-2w-1YL" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Eni-Rz-HwX"/>
+                <constraint firstItem="hrB-2w-1YL" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="KSb-TX-xVs"/>
+                <constraint firstAttribute="trailing" secondItem="hrB-2w-1YL" secondAttribute="trailing" id="bKG-8q-9zb"/>
+                <constraint firstAttribute="bottom" secondItem="hrB-2w-1YL" secondAttribute="bottom" id="cd1-Fk-MQH"/>
+                <constraint firstAttribute="bottom" secondItem="R2D-8K-qLU" secondAttribute="bottom" constant="50" id="cwN-gf-c3t"/>
+                <constraint firstAttribute="trailing" secondItem="R2D-8K-qLU" secondAttribute="trailing" constant="50" id="oE4-yb-Bd6"/>
+                <constraint firstItem="hrB-2w-1YL" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="u3H-DF-Xmd"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="icon_down" width="40" height="30"/>
+    </resources>
+</document>

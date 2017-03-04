@@ -66,6 +66,7 @@ static int leftTime = 3;
  */
 - (IBAction)jumpToHome:(id)sender {
     DLWordViewController *word = [[DLWordViewController alloc] init];
+//    word.view.frame = CGRectMake(0, DLHeight, DLScreenWidth, DLScreenHeight - DLHeight - Height);
     DLNavViewController *DLTabVc = [[DLNavViewController alloc] initWithRootViewController:word];
     [UIApplication sharedApplication].keyWindow.rootViewController = DLTabVc;
     //销毁定时器
