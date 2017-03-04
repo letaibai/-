@@ -47,9 +47,9 @@ static int page = 2;
     self.view.backgroundColor = [UIColor colorWithRed:222/255.0 green:222/255.0 blue:222/255.0 alpha:1.0];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([DLItemCell class]) bundle:nil] forCellReuseIdentifier:ID];
     //添加广告view
-    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, DLScreenHeight - Height, self.view.dl_width,Height )];
-    v.backgroundColor = [UIColor redColor];
-    [[[UIApplication sharedApplication].windows lastObject] addSubview:v];
+//    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, DLScreenHeight - Height, self.view.dl_width,Height )];
+//    v.backgroundColor = [UIColor redColor];
+//    [[[UIApplication sharedApplication].windows lastObject] addSubview:v];
 }
 #pragma mark - 点击了导航栏左侧的设置按钮
 - (void)settingClick:(UIBarButtonItem *)item
