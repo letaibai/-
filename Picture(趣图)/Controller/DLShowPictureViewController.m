@@ -41,9 +41,9 @@
 }
 //保存图片
 - (IBAction)save:(id)sender {
-    if(!self.image.image){
+//    if(!self.image.image){
         UIImageWriteToSavedPhotosAlbum(self.image.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-    }
+//    }
     
 }
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo

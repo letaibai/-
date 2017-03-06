@@ -36,8 +36,8 @@ static int page = 2;
 //初始化
 - (void)setup
 {
-    self.view.frame = CGRectMake(0, DLHeight, self.view.dl_width, self.view.dl_height - DLHeight);
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, Height,0);
+    self.view.frame = CGRectMake(0, DLHeight, DLScreenWidth, DLScreenHeight - DLHeight);
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, DLMargin,0);
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn setImage:[UIImage imageNamed:@"setting"] forState:UIControlStateNormal];
     [btn setImage:[UIImage imageNamed:@"setting_press"] forState:UIControlStateHighlighted];
@@ -103,6 +103,8 @@ static int page = 2;
     } success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *responseObject) {
         //字典转模型
         self.items = [DLItem mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"list"]];
+        
+        //尝试下载图片并获取图片的宽高
         [self typeForVc];
         
         //结束刷新
@@ -135,6 +137,7 @@ static int page = 2;
         //字典转模型
         NSArray *arr = [DLItem mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"list"]];
         [self.items addObjectsFromArray:arr];
+        
         [self typeForVc];
         //刷新表格
         [self.tableView reloadData];
@@ -186,4 +189,5 @@ static int page = 2;
 //{
 //    
 //}
+//UIMenuController
 @end

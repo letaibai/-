@@ -67,11 +67,41 @@ static int count = 0 ;
         [self.pic sd_setImageWithURL:[NSURL URLWithString:item.pic] placeholderImage:[UIImage imageNamed:@"img_default"]];
     }
     //时间
-    self.addTime.text = item.addtime;
-    //#warning 对时间显示做一下处理
+    self.addTime.text = [self create_time:item];
+
     //内容
     self.content.text = item.content;
     [self layoutIfNeeded];
+}
+//对时间显示做一下处理
+- (NSString *)create_time:(DLItem *)item
+{
+    //日期格式化类
+    NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
+    //设置日期格式
+    fmt.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    //帖子的创建时间
+    NSDate *create = [fmt dateFromString:item.addtime];
+    if (create.isThisYear) { //今年
+        if (create.isToday) { //今天
+            NSDateComponents *cmps = [[NSDate date] deltaFrom:create];
+            if (cmps.hour >= 1) {//时间差距 >= 1小时
+                return [NSString stringWithFormat:@"%zd小时前",cmps.hour];
+            } else if (cmps.minute >= 1){
+                return [NSString stringWithFormat:@"%zd分钟前",cmps.minute];
+            } else { //1分钟 > 时间差距
+                return @"刚刚";
+            }
+        } else if (create.isYesterday) { //昨天
+            fmt.dateFormat = @"昨天 HH:mm:ss";
+            return [fmt stringFromDate:create];
+        } else { //其他
+            fmt.dateFormat = @"MM-dd HH:mm:ss";
+            return [fmt stringFromDate:create];
+        }
+    } else {
+        return item.addtime;
+    }
 }
 #pragma mark - 设置cell的整体间距
 //设置cell的整体间距

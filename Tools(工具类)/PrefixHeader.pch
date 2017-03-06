@@ -17,6 +17,7 @@ typedef enum {
 
 #define DLLogFunc NSLog(@"%s",__func__);
 #import "UIView+DLFrame.h"
+#import "NSDate+DLDateExtension.h"
 #define DLHeight 64
 #define DLMargin 10
 #define Height 60

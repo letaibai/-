@@ -24,6 +24,7 @@
             //如果有imageview
             CGFloat imageY = textH;
             CGFloat imageH = textW * DLScreenHeight / (DLScreenWidth - 4 * DLMargin);
+//
             _cellHeight = imageY + imageH + 2 * DLMargin;
         }
     }
